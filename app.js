@@ -18,13 +18,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
+const placeholderFolder = path.join(__dirname, 'data', 'placeholder');
+if (!fs.existsSync(placeholderFolder)) {
+    fs.mkdirSync(placeholderFolder);
+    fs.writeFileSync(path.join(placeholderFolder, 'hh.txt'), 'This is a placeholder file.');
+}
+
 app.get('/', (req, res) => {
     const dataDirectory = path.join(__dirname, 'data');
-    const projectNames = fs.readdirSync(dataDirectory);
+    const projectNames = fs.readdirSync(dataDirectory).filter(name => name !== 'placeholder'); // Exclude the "placeholder" folder
 
     res.render('projects', { projectNames });
 });
-
 
 app.get('/project/:projectName', (req, res) => {
     const projectName = req.params.projectName;
