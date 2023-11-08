@@ -19,7 +19,7 @@ const upload = multer({ storage: storage });
 
 
 app.get('/', (req, res) => {
-    const dataDirectory = path.join(__dirname, 'data');
+    const dataDirectory = path.join(__dirname, 'placeholder', 'data');
     const projectNames = fs.readdirSync(dataDirectory);
 
     res.render('projects', { projectNames });
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.get('/project/:projectName', (req, res) => {
     const projectName = req.params.projectName;
 
-    const textFilePath = path.join(__dirname, 'data', `${projectName}`, `text_data.json`);
+    const textFilePath = path.join(__dirname, 'placeholder', 'data', `${projectName}`, `text_data.json`);
     let textData = [];
 
     if (fs.existsSync(textFilePath)) {
@@ -37,7 +37,7 @@ app.get('/project/:projectName', (req, res) => {
         textData = JSON.parse(textDataJson);
     }
 
-    const notesFilePath = path.join(__dirname, 'data', `${projectName}`, `notes_data.json`);
+    const notesFilePath = path.join(__dirname, 'placeholder', 'data', `${projectName}`, `notes_data.json`);
     let notesData = [];
 
     if (fs.existsSync(notesFilePath)) {
@@ -51,7 +51,7 @@ app.get('/project/:projectName', (req, res) => {
 app.post('/create-project', (req, res) => {
     const projectName = req.body.projectName;
 
-    const folderPath = path.join(__dirname, 'data', `${projectName}`);
+    const folderPath = path.join(__dirname, 'placeholder', 'data', `${projectName}`);
     if (!fs.existsSync(folderPath)) {
         fs.mkdirSync(folderPath);
     }
@@ -76,7 +76,7 @@ app.post('/process-choice', (req, res) => {
 app.get('/project/:projectName/text', (req, res) => {
     const projectName = req.params.projectName;
     let textData = [];
-    const filePath = path.join(__dirname, 'data', `${projectName}`, `text_data.json`);
+    const filePath = path.join(__dirname, 'placeholder', 'data', `${projectName}`, `text_data.json`);
 
     if (fs.existsSync(filePath)) {
         const data = fs.readFileSync(filePath, 'utf8');
@@ -89,7 +89,7 @@ app.get('/project/:projectName/text', (req, res) => {
 app.get('/project/:projectName/notes', (req, res) => {
     const projectName = req.params.projectName;
     let notesData = [];
-    const filePath = path.join(__dirname, 'data', `${projectName}`, `notes_data.json`);
+    const filePath = path.join(__dirname, 'placeholder', 'data', `${projectName}`, `notes_data.json`);
 
     if (fs.existsSync(filePath)) {
         const data = fs.readFileSync(filePath, 'utf8');
@@ -104,7 +104,7 @@ app.post('/store-notes', upload.single('image'), (req, res) => {
     const text = req.body.text;
     const imageFilePath = req.file.path;
 
-    const folderPath = path.join(__dirname, 'data', projectName);
+    const folderPath = path.join(__dirname, 'placeholder', 'data', projectName);
     const filePath = path.join(folderPath, 'notes_data.json');
     let notesData = [];
     let noteId = 1;
@@ -142,7 +142,7 @@ app.post('/store-text', (req, res) => {
     const projectName = req.body.projectName;
 
     const text = req.body.text;
-    const folderPath = path.join(__dirname, 'data', `${projectName}`);
+    const folderPath = path.join(__dirname, 'placeholder', 'data', `${projectName}`);
     const filePath = path.join(folderPath, 'text_data.json');
     let textData = [];
 
@@ -163,7 +163,7 @@ app.get('/project/:projectName/:itemType/:itemId', (req, res) => {
     const itemType = req.params.itemType; 
     const itemId = req.params.itemId; 
 
-    const folderPath = path.join(__dirname, 'data', `${projectName}`);
+    const folderPath = path.join(__dirname, 'placeholder', 'data', `${projectName}`);
     const filePath = path.join(folderPath, `${itemType}_data.json`);
 
     let itemData = [];
@@ -183,7 +183,7 @@ app.post('/edit-item', (req, res) => {
     const itemId = req.body.itemId;
     const updatedContent = req.body.updatedContent;
 
-    const folderPath = path.join(__dirname, 'data', `${projectName}`);
+    const folderPath = path.join(__dirname, 'placeholder', 'data', `${projectName}`);
     const filePath = path.join(folderPath, `${itemType}_data.json`);
 
     let itemData = [];
@@ -204,7 +204,7 @@ app.get('/project/:projectName/notes/:noteId/edit', (req, res) => {
     const projectName = req.params.projectName;
     const noteId = req.params.noteId;
 
-    const filePath = path.join(__dirname, 'data', projectName, 'notes_data.json');
+    const filePath = path.join(__dirname, 'placeholder', 'data', projectName, 'notes_data.json');
     let notesData = [];
 
     if (fs.existsSync(filePath)) {
@@ -231,7 +231,7 @@ app.post('/update-note/:projectName/:noteId', (req, res) => {
     const noteId = req.params.noteId;
     const updatedContent = req.body.updatedContent;
 
-    const filePath = path.join(__dirname, 'data', projectName, 'notes_data.json');
+    const filePath = path.join(__dirname, 'placeholder', 'data', projectName, 'notes_data.json');
     let notesData = [];
 
     if (fs.existsSync(filePath)) {
