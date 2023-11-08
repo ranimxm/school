@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+</head>
+
+<body>
+    <h1>Edit Item</h1>
+    <form action="/edit-item" method="post">
+        <input type="hidden" name="projectName" value="<%= projectName %>">
+        <input type="hidden" name="itemType" value="<%= itemType %>">
+        <input type="hidden" name="itemId" value="<%= itemId %>">
+        <textarea name="updatedContent" rows="4" cols="50"><%= itemContent %></textarea>
+        <button type="submit">Save</button>
+    </form>
+    <a href="/project/<%= projectName %>">Back to Folder</a>
+</body>
+
+</html>

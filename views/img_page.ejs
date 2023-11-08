@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image Page</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="topbar-container">
+            <div class="top-title">
+                <a href="/project/<%= projectName %>"> < </a>
+                <p>Img </p>
+            </div>
+            <div class="top-share">
+                <img src="/img/ic_baseline-share.png" class="share">
+            </div>
+        </div>
+    </header>
+    
+    <section class="img-container">
+        <form action="/store-notes" method="post" enctype="multipart/form-data">
+            <div class="top-image">
+                    <input type="hidden" name="projectName" value="<%= projectName %>">
+                    <label class="custom-file-upload">
+                        <input type="file" id="imageInput" name="image" accept="image/*" multiple>
+                        Select file
+                    </label>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="paper-container">
+                <div class="container">
+                <img id="uploadedImage" class="image-output" src="" alt="Uploaded Image">
+
+                </div>
+                <div id="output"></div>
+            </div>
+
+
+
+            <div class="container-save">
+                <button class="add" type="submit">
+                    <img src="/img/save.png">
+                </button>
+            </div>
+        </form>
+
+    </section>
+
+
+
+    <script src="/js/uploadImg.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= projectName %> </title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="topbar-container">
+            <div class="top-title">
+                <a href="/"> < </a>
+                <img src="/img/folder.png" class="folder">
+                <p><%= projectName %> </p>
+            </div>
+            <div class="top-share">
+                <img src="/img/ic_baseline-share.png" class="share">
+            </div>
+        </div>
+    </header>
+
+    <section class="projects-container">
+        <ul class="projects-list">
+            <% const combinedData=textData.concat(notesData); %>
+                <% if (combinedData.length===0) { %>
+                    <div class="nothing-container">
+                        <p>There is no data available.</p>
+                        <p>Click on the button '+' to add new data.</p>
+                    </div>
+                    <% } else { %>
+                        <% combinedData.forEach((item, index)=> { %>
+                            <li class="project-item">
+                                <% if (item.hasOwnProperty('preview')) { %>
+                                        <a href="/project/<%= projectName %>/notes/<%= item.id %>/edit"> 
+                                            <div class="icon-container">
+                                                <img src="/img/image-item.png">
+                                            </div>
+                                            <p><%= item.preview %></p>
+                                        </a>
+                                    <% } else { %>
+                                        <a href="/project/<%= projectName %>/text/<%= index %>"> 
+                                            <div class="icon-container">
+                                                <img src="/img/audio-item.png">
+                                            </div>
+                                            <p> <%= item %> </p>
+                                        </a>
+                                    <% } %>
+                            </li>
+                        <% }); %>
+                    <% } %>
+        </ul>
+    </section>
+    
+<div class="overlay" id="overlay"></div>
+
+    <section class="container-save">
+        <div class="options-container">
+            <div id="options" class="hidden">
+                <button class="rounded-button option" data-choice="text">
+                    <img src="/img/audio.png">
+                </button>
+                <button class="rounded-button option" data-choice="notes">
+                    <img src="/img/camera.png">
+                </button>
+            </div>
+            <button id="toggle-options" class="add">
+                <img src="/img/todo.png">
+            </button>
+        </div>
+    </section>
+
+
+    <script>
+        //used chatgpt for this haha
+        const toggleButton = document.getElementById("toggle-options");
+        const options = document.getElementById("options");
+        const optionButtons = document.querySelectorAll(".option");
+
+        toggleButton.addEventListener("click", () => {
+            options.classList.toggle("hidden");
+        });
+
+        optionButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const choice = button.getAttribute("data-choice");
+                const projectName = "<%= projectName %>"; 
+                const form = document.createElement("form");
+                
+                form.method = "POST";
+                form.action = "/process-choice";
+                form.style.display = "hidden";
+
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "projectName";
+                input.value = projectName;
+                form.appendChild(input);
+
+                const choiceInput = document.createElement("input");
+                choiceInput.type = "hidden";
+                choiceInput.name = "choice";
+                choiceInput.value = choice;
+                form.appendChild(choiceInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            });
+        });
+            const overlay = document.getElementById("overlay");
+
+            toggleButton.addEventListener("click", () => {
+                options.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            options.addEventListener("click", () => {
+                options.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projects</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="topbar-container">
+            <div class="top-title">
+                <img src="/img/folder.png" class="folder">
+                <p>Projects</p>
+            </div>
+            <div class="top-share">
+                <img src="/img/ic_baseline-share.png" class="share">
+            </div>
+        </div>
+    </header>
+
+    <section class="projects-container">
+        <% if (projectNames.length> 0) { %>
+            <ul class="projects-list">
+                <% projectNames.forEach(projectName=> { %>
+                    <li class="project-item">
+                        <a href="/project/<%= projectName %>">
+                            <div class="icon-container pro">
+                                <img src="/img/Vector.png">
+                            </div>
+                            <p> <%= projectName %> </p>
+                        </a>
+                    </li>
+                    <% }); %>
+            </ul>
+            <% } else { %>
+                <div class="nothing-container">
+                    <p>There is no project available.</p>
+                    <p>Click on the button '+' to add a new project.</p>
+                </div>
+                <% } %>
+    </section>
+
+    <section class=" container-save">
+        <button id="addProjectBtn" class="add">+</button>
+        <!-- <form id="createProject" class="hidden" action="/create-project" method="post">
+            <input type="text" id="projectName" name="projectName" placeholder="Enter project name">
+            <button type="button" id="confirmBtn">Confirm</button>
+        </form> -->
+    </section>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="top-container">
+                <h3>Add a new project</h3>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <form id="createProject" action="/create-project" method="post">
+                <input type="text" id="projectName" name="projectName" placeholder="Enter project name">
+                <button type="button" id="confirmBtn">Confirm</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="/js/addButtonProjects.js"></script>
+</body>
+
+</html>

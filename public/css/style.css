@@ -1,0 +1,321 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+:root{
+    --lightBlue: #A2D2FF ; 
+    --purple:#9685FF ;
+    --white: #FFFFFF;
+    --grey:#F2F2F2 ;
+    --shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+body{
+    font-family: 'Segoe UI', 'San Francisco', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--grey);
+}
+
+.top-title a, .top-title p{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 7em;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.topbar-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 2em;
+    padding-top: 3em;
+    justify-content: space-between;
+}
+
+.top-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+}
+
+.projects-container{
+    display: flex;
+    margin-top: 2em;
+    height: 70vh;
+    width: 100%;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.img-container{
+    display: flex;
+    height: 80vh;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--grey);
+}
+.top-image{
+    display: flex;
+    flex-direction: row;
+    height: 5em;
+    align-items: center;
+    padding-left: 2em;
+}
+.paper-container{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    min-height: 60vh;
+    padding: 1.5em;
+    max-width: 100%;
+}
+.image-output{
+    width: 100%;
+    height: auto;
+}
+.container{
+    border-radius: 25px;
+    padding: .5em;
+}
+#output{
+    margin-top: 1em;
+}
+.nothing-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* Add this to your style.css */
+.popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #2196F3;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    display: none;
+    z-index: 2;
+}
+.addBtn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 2em;
+    padding-right: 5em;
+}
+.add{
+    border-radius: 50%;
+    background-color: var(--lightBlue);
+    width: 3em;
+    height: 3em;
+    text-align: center;
+    border: none;
+    font-size: 22px;
+    color: var(--white);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2em;
+}
+
+.top-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+    width: 100%;
+}
+.close {
+    font-size: 22px;
+    font-weight: bolder;
+    cursor: pointer;
+    margin-top: -.5em;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: .3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.168);
+    z-index: 1;
+}
+
+.overlay.active {
+    display: block;
+}
+
+#projectName {
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    padding-bottom: 1em;
+}
+
+#projectName:focus,
+#projectName:hover {
+    border-bottom: 2px solid var(--lightBlue);
+}
+
+#createProject{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#confirmBtn, .custom-file-upload{
+    border: none;
+    background-color: var(--lightBlue);
+    color: white;
+    height: 2em;
+    padding: .5em;
+    text-align: center;
+}
+
+.custom-file-upload{
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    width: 5em;
+    justify-content: center;
+    height: 1em;
+}
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.container-save{
+    position: fixed;
+    right: 5em;
+    bottom: 2em;
+    z-index: 99;
+}
+.options-container {
+      position: relative;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: var(--lightBlue);
+    transition: width 0.3s;
+}
+.rounded-button {
+    border-radius: 50%;
+    background-color: var(--purple);
+    width: 3em;
+    height: 3em;
+    text-align: center;
+    border: none;
+    font-size: 22px;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+#options {
+    position: absolute;
+    top: -11em;
+    right: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.option {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1em;
+}
+
+.projects-list{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: center;
+    padding: 2em;
+    gap: 1.2em;
+}
+
+.project-item{
+    height: 8em;
+    width: 8em;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-item p{
+    font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+}
+
+.icon-container{
+    background-color: var(--purple);
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pro {
+    height: 8em;
+}
+
+.textarea{
+    border: none;
+    font-family: 'Segoe UI', 'San Francisco', 'Helvetica Neue', Arial, sans-serif;
+    padding: 8px;
+    font-size: 16px;
+}
